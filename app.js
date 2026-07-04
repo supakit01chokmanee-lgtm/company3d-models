@@ -20,7 +20,16 @@ antialias:true
 renderer.setSize(window.innerWidth,window.innerHeight);
 
 document.getElementById("viewer").appendChild(renderer.domElement);
+const controls = new OrbitControls(camera, renderer.domElement);
 
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+const grid = new THREE.GridHelper(20,20);
+
+scene.add(grid);
+const axes = new THREE.AxesHelper(3);
+
+scene.add(axes);
 const light=new THREE.HemisphereLight(0xffffff,0x444444,3);
 
 scene.add(light);
@@ -29,8 +38,17 @@ function animate(){
 
 requestAnimationFrame(animate);
 
+controls.update();
+
 renderer.render(scene,camera);
 
 }
+window.addEventListener("resize",()=>{
 
-animate();
+camera.aspect=window.innerWidth/window.innerHeight;
+
+camera.updateProjectionMatrix();
+
+renderer.setSize(window.innerWidth,window.innerHeight);
+
+});
