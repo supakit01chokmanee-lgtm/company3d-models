@@ -1,0 +1,36 @@
+import * as THREE from 'https://unpkg.com/three@0.166.1/build/three.module.js';
+
+const scene = new THREE.Scene();
+
+scene.background = new THREE.Color(0xf2f2f2);
+
+const camera = new THREE.PerspectiveCamera(
+45,
+window.innerWidth/window.innerHeight,
+0.1,
+1000
+);
+
+camera.position.set(3,3,6);
+
+const renderer = new THREE.WebGLRenderer({
+antialias:true
+});
+
+renderer.setSize(window.innerWidth,window.innerHeight);
+
+document.getElementById("viewer").appendChild(renderer.domElement);
+
+const light=new THREE.HemisphereLight(0xffffff,0x444444,3);
+
+scene.add(light);
+
+function animate(){
+
+requestAnimationFrame(animate);
+
+renderer.render(scene,camera);
+
+}
+
+animate();
