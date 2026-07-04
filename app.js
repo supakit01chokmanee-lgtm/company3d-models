@@ -43,6 +43,7 @@ controls.update();
 renderer.render(scene,camera);
 
 }
+animate();
 window.addEventListener("resize",()=>{
 
 camera.aspect=window.innerWidth/window.innerHeight;
